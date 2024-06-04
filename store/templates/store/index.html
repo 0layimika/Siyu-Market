@@ -3,21 +3,22 @@
 {% load static %}
 
      <!-- Index Page -->
-    <section class="px-[8px] py-[24px] mx-auto w-fit max-w-[1440px]">
+    <section class="px-[8px] py-[24px] mx-auto w-fit max-w-[1440px] mb-12">
     <h2 class="uppercase font-bold text-[21px] tracking-wide">Shop All</h2>
-    <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-[12px]">
+    {% if product_list %}
+        <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-[12px]">
         {% for product in product_list %}
 
-            <div class="bg-white rounded-md w-full max-w-[210px] xsm:max-w-[235px] s:max-w-[280px] md:max-w-[300px] overflow-hidden flex flex-col h-[340px] md:h-[320px] relative hover:scale-[1.02] hover:shadow-lg transition-all duration-300 ease-in-out ">
+            <div class="bg-black rounded-md w-full max-w-[210px] xsm:max-w-[235px] s:max-w-[280px] md:max-w-[300px] overflow-hidden flex flex-col h-[340px] md:h-[320px] relative hover:scale-[1.02] hover:shadow-lg transition-all duration-300 ease-in-out ">
                 <a href="{% url 'details' product_id=product.pk %}" class="flex-grow">
                     <div class="image-container h-[150px] xsm:h-[170px] bg-grey-btn">
-                         {% comment %} <img class="w-full h-full" src="{{ product.image.url }}" alt="..."> {% endcomment %}
+                         <img class="w-[250px] h-full" src="{{ product.image.url }}" alt="...">
                     </div>
 
                     <div class="flex flex-col flex-grow gap-[5px] p-[8px]">
-                        <h5 class="font-bold text-[15px]">{{ product.name }}</h5>
-                        <p class="text-[12px] font-light pb-[10px]">{{ product.summary }}</p>
-                        <div class="border p-2 text-center rounded-sm absolute bottom-[8px] left-0 right-0 w-[97%] mx-auto">
+                        <h5 class="font-bold text-[15px] text-white">{{ product.name }}</h5>
+                        <p class="text-[12px] font-light pb-[10px] text-white">{{ product.store }}</p>
+                        <div class="border p-2 bg-white text-center rounded-sm absolute bottom-[8px] left-0 right-0 w-[97%] mx-auto">
                             <p class="text-[14px] flex items-center gap-[10px] mx-auto w-fit relative bottom-0">
                                 <img class="w-[16px]" src="{% static 'images/cart.svg' %}"> -
                                 ₦{{ product.price }}
@@ -29,6 +30,19 @@
 
         {% endfor %}
     </div>
+    {% else %}
+        <div class="max-w-[1440px] bg-white w-[95%] p-[20px] mt-[24px] shadow-custom mx-auto grid place-content-center gap-[16px]">
+        <div class="bg-grey rounded-full p-[24px] h-full w-[120px] mx-auto">
+            <img class="h-full w-[120px] mx-auto" src="{% static 'images/empty-cart.svg' %}">
+        </div>
+        <h3 class="text-center font-main">No Stores available at the moment.</h3>
+        <p class="text-center">Register with your Email to get Notification when we Launch</p>
+        <a class="uppercase shadow-lg text-center w-fit mx-auto font-main text-[14px] p-[12px] bg-black text-white hover:bg-soft-black hover:rounded-sm transition" href="{% url 'signup' %}">
+            Sign Up!!
+        </a>
+        </div>
+    {% endif %}
+
 
     </section>
 {% endblock %}

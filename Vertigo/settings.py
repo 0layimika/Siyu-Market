@@ -135,3 +135,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 PAYSTACK_SECRET_KEY = "sk_test_6fcc4bbe693190841c333d94e606076e1284d4fc"
 PAYSTACK_PUBLIC_KEY = "pk_test_2662b54aba5e0b6bfbf3bf3a70fae6a986cb5fa9"
+
+ENCRYPT_KEY = b''
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'siyumarket@gmail.com'
+EMAIL_HOST_PASSWORD = 'axjntlvramrwanmp'
+EMAIL_DEBUG = True

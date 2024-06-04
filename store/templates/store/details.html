@@ -4,7 +4,7 @@
 
 
 
-<div class="max-w-[1200px] mt-[16px] bg-white w-[95%] p-[20px] mx-auto details">
+<div class="max-w-[1200px] mt-[16px] bg-white w-[95%] p-[20px] mx-auto details mb-12">
     <div class="flex flex-col items-start gap-[16px] details s:flex-row max-w-[800px]">
         <div class="w-full relative rounded-md overflow-hidden s:max-h-[270px] s:max-w-[285px]">
             {#<a href="{% url 'details' product_id=product.pk %}" class="card-link">#}
@@ -19,9 +19,11 @@
                 <form class="grid gap-[10px]" id="select-size" method="post" action="{% url 'cart' product_id=products.pk %}">
                 {% csrf_token %}
                     </select>
+                    <p class="font-bold"> Please select a size</p>
+                    <p class="text-[10px]">if product is not in sizes, select any</p>
                     <div class="grid grid-cols-3 items-start gap-[10px] w-full pb-[13px]">
                         <label  class="inline-block p-[5px] px-[10px] text-center border border-grey-btn hover:bg-black hover:text-white text-[13px] cursor-pointer">
-                            <input class="hidden size" type="radio" name="size" value="Large">
+                            <input class="hidden size" type="radio" name="size" value="Large" required>
                             Large
                         </label>
                         <label class="inline-block p-[5px] px-[10px] border text-center border-grey-btn hover:bg-black hover:text-white text-[13px] cursor-pointer">

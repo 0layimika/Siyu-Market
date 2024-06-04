@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+    <body>
+    <div class="px-[8px] py-[24px] mx-auto w-fit max-w-[1440px]">
+        <div>
+            <h1 class="text-[32px] font-extrabold text-center">Welcome to Siyu Market</h1>
+            <p class="text-center font-bold">Siyu market is your <strong>no.1</strong> plug for everything you could possibly be looking for. </p>
+            <p class="text-center font-bold">Products available include clothing, jewelries, perfumes, iPod accessories and lots more form your favorite and most affordable vendors.</p>
+        </div>
+        {% if store_list %}
+        <div class="mt-[24px] flex flex-wrap justify-center mb-[18px]">
+            {% for store in store_list %}
+                <a href="{% url 'shop' shop=store.store_name %}" class="w-[360px] border-[1.5px] border-black rounded-md px-[5px] py-[12px] text-center cursor-pointer hover:bg-white hover:text-black mx-[8px] mb-[15px] bg-black text-white">
+                <h1 class="">{{ store.store_name }}</h1>
+                <p>{{ store.description}}</p>
+                </a>
+            {% endfor %}
+        </div>
+            {% else %}
+        <div class="max-w-[1440px] bg-white w-[95%] p-[20px] mt-[24px] shadow-custom mx-auto grid place-content-center gap-[16px]">
+        <div class="bg-grey rounded-full p-[24px] h-full w-[120px] mx-auto">
+            <img class="h-full w-[120px] mx-auto" src="{% static 'images/empty-cart.svg' %}">
+        </div>
+        <h3 class="text-center font-main">No Stores available at the moment.</h3>
+        <p class="text-center">Register with your Email to get Notification when we Launch</p>
+        <a class="uppercase shadow-lg text-center w-fit mx-auto font-main text-[14px] p-[12px] bg-black text-white hover:bg-soft-black hover:rounded-sm transition" href="{% url 'signup' %}">
+            Sign Up!!
+        </a>
+        </div>
+        {% endif %}
+        <div class="flex justify-center mt-[24px] mb-12">
+            <a href="{% url 'home' %}" class="text-center border-[1.5px] border-black hover:bg-black hover:border-white hover:text-white px-[8px] py-[12px] rounded-md bg-white"> Shop All</a>
+        </div>
+    </div>
+    </body>
+{% endblock %}

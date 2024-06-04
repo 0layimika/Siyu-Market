@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .email-container {
+            font-family: Arial, sans-serif;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        .email-header {
+            background-color: #f8f8f8;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .email-body {
+            padding: 20px;
+        }
+        .order-items {
+            margin-top: 20px;
+        }
+        .order-item {
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="email-header">
+            <h2>An Order Has Been Placed</h2>
+        </div>
+        <div class="email-body">
+            <p>Dear {{ order.name }} of {{ order.address }},</p>
+            <p>Your order has been successfully placed. Here are the details:</p>
+            <div class="order-items">
+                {% for item in order.order_items.all %}
+                    <div class="order-item">
+                        <p>{{ item.quantity }}X {{ item.product.name }}({{ item.size }}) from {{ item.size }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+            <p>Thank you for shopping with us!</p>
+        </div>
+    </div>
+</body>
+</html>

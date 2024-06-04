@@ -12,13 +12,28 @@
         <h3 class="text-[24px]">Shipping Information</h3>
         <div class="flex flex-col gap-[5px] relative pb-[18px]">
             <label for="name">Name<sup class="text-dark-red opacity-75">*</sup></label>
-            <input class="bg-white border border-gold p-[12px] rounded-sm shadow-sm outline-none" type="text" name="name" id="name" placeholder="John Doe" required>
+            <input class="bg-white border border-gold p-[12px] rounded-sm shadow-sm outline-none" type="text" name="name" id="name" placeholder="Shola Coker" required>
             <div class="error-message text-dark-red text-[10px] absolute bottom-0 left-0 hidden" id="name-error">Please fill in your name.</div>
         </div>
         <div class="flex flex-col gap-[5px] relative pb-[18px]">
-            <label for="address">Address<sup class="text-dark-red opacity-75">*</sup></label>
-            <input class="bg-white border border-gold p-[12px] rounded-sm shadow-sm outline-none" type="text" name="address" id="address" placeholder="123 Residential Address" required>
+            <label for="address">Hall(Room Number)<sup class="text-dark-red opacity-75">*</sup></label>
+            <input class="bg-white border border-gold p-[12px] rounded-sm shadow-sm outline-none" type="text" name="address" id="address" placeholder="Joseph(D312)" required>
+            <div class="error-message text-dark-red text-[10px] absolute bottom-0 left-0 hidden" id="address-error">Please fill in your room details</div>
+        </div>
+        <div class="flex flex-col gap-[5px] relative pb-[18px]">
+            <label for="email">Email<sup class="text-dark-red opacity-75">*</sup></label>
+            <input class="bg-white border border-gold p-[12px] rounded-sm shadow-sm outline-none" type="email" name="email" id="email" placeholder="shola@example.com" required>
+            <div class="error-message text-dark-red text-[10px] absolute bottom-0 left-0 hidden" id="address-error">Please fill in your email</div>
+        </div>
+        <div class="flex flex-col gap-[5px] relative pb-[18px]">
+            <label for="telephone">Telegram number<sup class="text-dark-red opacity-75">*</sup></label>
+            <input class="bg-white border border-gold p-[12px] rounded-sm shadow-sm outline-none" type="telephone" name="telephone" id="telephone" placeholder="0800 0000 000" required>
             <div class="error-message text-dark-red text-[10px] absolute bottom-0 left-0 hidden" id="address-error">Please fill in your address</div>
+        </div>
+        <div class="flex flex-col gap-[5px] relative pb-[18px]">
+            <label for="instructions">Additional Instructions<sup class="text-dark-red opacity-75">*</sup></label>
+            <input class="bg-white border border-gold p-[12px] rounded-sm shadow-sm outline-none" type="text" name="instructions" id="Instructions" placeholder="Talk to Me">
+            <div class="error-message text-dark-red text-[10px] absolute bottom-0 left-0 hidden" id="address-error"></div>
         </div>
         <!-- Add more shipping fields as needed -->
 
@@ -39,7 +54,7 @@
         <ul class="bg-grey p-[10px] font-main">
             {% for item in cart_items %}
             <li class="flex flex-col pb-[15px]">
-                <p class="font-medium">{{ item.product.name }} [{{ item.size }}] </p>
+                <p class="font-medium">{{ item.product.name }} [{{ item.size }}] from {{ item.product.store }}</p>
                 <div class="flex justify-between items-start">
                     <p>Qty : {{ item.quantity }}</p>
                     <p>Sub-Total : ₦{{ item.product.price }}</p>
@@ -47,6 +62,7 @@
             </li>
             {% endfor %}
         </ul>
+        <p class="shadow-sm text-center font-main w-fit text-[16px] py-[12px] px-[24px] ml-auto">Delivery Fee : <span class="font-bold text-[18px]">₦{{ delivery_fee }}</span></p>
         <p class="shadow-sm text-center font-main w-fit text-[16px] py-[12px] px-[24px] ml-auto">Total : <span class="font-bold text-[18px]">₦{{ total_price }}</span></p>
 
         <!-- Submit Button -->

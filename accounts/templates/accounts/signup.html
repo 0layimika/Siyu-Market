@@ -9,10 +9,21 @@
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;1,700&display=swap" rel="stylesheet">
  <link rel="stylesheet" href="{% static 'css/output.css' %}">
+ <script src="https://www.google.com/recaptcha/api.js?render=6Lcu4vEoAAAAAGEXHqglg3Knhk2w6GUIALOHfPSV"></script>
+ <script>
+    grecaptcha.ready(function() {
+        grecaptcha.execute('your_site_key', {action: 'signup'})
+            .then(function(token) {
+                document.getElementById('g-recaptcha-response').value = token;
+            });
+    });
+</script>
+
+
  <title>Sign Up</title>
  
 </head>
-<body class="bg-grey">
+<body class="bg-white">
     <div class="flex flex-col h-full max-w-full mx-auto my-0 p-[40px] md:p-[28px] rounded-xl w-[360px] xs:w-[450px] gap-[12px] md:gap-[16px] content-center justify-center">
         <div><a class="text-[24px]" href="{% url 'home' %}">&larr;</a></div>
 
@@ -40,8 +51,10 @@
                         <input type="password" id="confirm_password" name="confirm_password"  placeholder="Confirm password" class="bg-white border border-gold p-[12px] rounded-lg shadow-sm outline-none" required>
                         <div class="error-message text-dark-red text-[10px] absolute bottom-[5px] left-0 hidden" id="confirm_password-error">This field is required.</div>
                     </div>
+                    <div><input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response"></div>
                     <button id="signup-btn" type="submit" class="text-center py-[12px] bg-black text-white font-bold font-sans rounded-lg hover:bg-soft-black duration-300 transition-colors ease-in-out">Sign Up</button>
                 </form>
+
                 {% if error %}
                 {{ error }}
                 {% endif %}

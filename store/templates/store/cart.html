@@ -24,7 +24,7 @@
                 <p class="font-extrabold text-[10px] uppercase">Product :</p>
                 <div class="flex gap-[8px]">
                     <img class="w-[80px] h-full" src="{{ cart_item.product.image.url }}"></img>
-                    <p>{{ cart_item.product.name }} <br> [ {{ cart_item.size}} ]</p>
+                    <p>{{ cart_item.product.name }} <br> [ {{ cart_item.size}} ] <br> {{ cart_item.product.store }}</p>
                 </div>
             </div>
             <div class="border-b-[0.3px] border-soft-black pb-[18px]">
@@ -55,7 +55,7 @@
                     </a>
                     <div class="flex gap-[8px]">
                         <img class="w-[80px] h-full" src="{{ cart_item.product.image.url }}"></img>
-                        <p>{{ cart_item.product.name }} <br> [ {{ cart_item.size}} ]</p>
+                        <p>{{ cart_item.product.name }} <br> [ {{ cart_item.size}} ] <br> {{ cart_item.product.store }}</p>
                     </div>
                 </div>
             </div>
@@ -85,7 +85,7 @@
 </div>
 
 {% else %}
-<div class="max-w-[1440px] bg-white w-[95%] p-[20px] mt-[24px] shadow-custom mx-auto grid place-content-center gap-[16px]">
+<div class="max-w-[1440px] bg-white w-[95%] p-[20px] mt-[24px] shadow-custom mx-auto grid place-content-center gap-[16px] mb-12">
     <div class="bg-grey rounded-full p-[24px] h-full w-[120px] mx-auto">
         <img class="h-full w-[120px] mx-auto" src="{% static 'images/empty-cart.svg' %}">
     </div>

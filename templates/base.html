@@ -9,10 +9,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;1,700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/output.css' %}" />
-    <link rel="icon" href="#"/>
-    <title>Vertigo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="{% static 'images/logo1.png' %}"/>
+      <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <title>Siyu Market</title>
   </head>
-  <body class="relative font-main bg-grey">
+  <body class="relative font-main" style="background-color: saddlebrown">
     <main class="max-w-[100%] mx-auto relative">
       <!-- ===== Overlays ====== -->
       <div
@@ -24,7 +26,7 @@
       ></div>
 
       <!-- ===== Navigation ====== -->
-      <nav class="flex justify-between items-center px-[24px] py-[15px] sticky top-0 z-20 w-full bg-white">
+      <nav class="flex justify-between items-center px-[24px] py-[12px] sticky top-0 z-20 w-full shadow" style="background-color: #e8e8e8">
         <div class="flex items-center gap-[14px] relative">
 
           <!-- ===== Menu Buttons ====== -->
@@ -45,17 +47,17 @@
           <div class="hidden lg:block">
             <ul class="flex gap-[15px]">
               <li class="py-[3px] relative">
-                <a class="text-[15px] nav__link" href="{% url 'shirts' %}">
-                  Shirts
+                <a class="text-[15px] nav__link" href="{% url 'perfume' %}">
+                  Perfumes
                   </a>
               </li>
               <li class="py-[3px] relative">
-                <a class="text-[15px] nav__link"  href="{% url 'sweats' %}">
-                  Sweats & hoodies</a>
+                <a class="text-[15px] nav__link"  href="{% url 'jewelry' %}">
+                  Jewelries</a>
               </li>
               <li class="py-[3px] relative">
-                <a class="text-[15px] nav__link" href="{% url 'shorts' %}">
-                  Shorts and Cargos
+                <a class="text-[15px] nav__link" href="{% url 'clothing' %}">
+                  Clothings
                 </a>
               </li>
               <li class="py-[3px] relative">
@@ -63,12 +65,17 @@
                   Accessories
                 </a>
               </li>
+              <li class="py-[3px] relative">
+                <a class="text-[15px] nav__link" href="{% url 'entry' %}">
+                  Stores
+                </a>
+              </li>
             </ul>
           </div>
         </div>
 
         <!-- ===== VERTIGO LOGO ====== -->
-        <a class="inline-block absolute top-[16px] left-[50%] translate-x-[-50%] md:translate-x-[-45%] " href="{% url 'home' %}">
+        <a class="inline-block absolute top-[16px] left-[50%] translate-x-[-50%] md:translate-x-[-45%] " href="{% url 'entry' %}">
           <img class="w-[85px]" src="{% static 'images/logo1.png' %}" alt="vertigo"/>
         </a>
 
@@ -114,20 +121,20 @@
         <!-- ===== History of Searches ====== -->
         <div class="text-[15px] mb-[18px]">
           <h2 class="text-soft-black opacity-80 pb-[5px]">Trending Searches</h2>
-          <p>shorts</p>
-          <p>cargo shorts</p>
-          <p>leather jackets</p>
-          <p>black hoodies</p>
-          <p>sweatshirts</p>
+          <p>Perfume</p>
+          <p>Necklace</p>
+          <p>Ring</p>
+          <p>hoodies</p>
+          <p>Cargos</p>
         </div>
 
         <div class="text-[15px]">
           <h2 class="text-soft-black opacity-80 pb-[5px]">Trending Products</h2>
-          <p>shorts</p>
-          <p>cargo shorts</p>
-          <p>leather jackets</p>
-          <p>black hoodies</p>
-          <p>sweatshirts</p>
+          <p>Perfume</p>
+          <p>Necklace</p>
+          <p>Ring</p>
+          <p>hoodies</p>
+          <p>Cargos</p>
         </div>
 
         <img></img>
@@ -143,25 +150,74 @@
 
         <ul class="grid gap-[5px] pt-[50px]">
           <li class="py-[13px] px-[24px] bg-grey hover:bg-grey group">
-            <a class="flex justify-between items-center"  href="{% url 'shirts' %}">Shirts <span class="text-[18px] rotate-[-36deg] group-hover:rotate-0 transition ease-linear">&rarr;</span> </a>           
+            <a class="flex justify-between items-center"  href="{% url 'clothing' %}">Clothings <span class="text-[18px] rotate-[-36deg] group-hover:rotate-0 transition ease-linear">&rarr;</span> </a>
           </li>
           <li class="py-[13px] px-[24px] hover:bg-grey group">
-            <a class="flex justify-between items-center"  href="{% url 'sweats' %}"
-              >Sweats & hoodies <span class="text-[18px] rotate-[-36deg] group-hover:rotate-0 transition ease-linear">&rarr;</span></a>
+            <a class="flex justify-between items-center"  href="{% url 'jewelry' %}"
+              >Jewelries<span class="text-[18px] rotate-[-36deg] group-hover:rotate-0 transition ease-linear">&rarr;</span></a>
             </li>
           <li class="py-[13px] px-[24px] hover:bg-grey group">
-            <a class="flex justify-between items-center"  href="{% url 'shorts' %}"
-              >Shorts and Cargos <span class="text-[18px] rotate-[-36deg] group-hover:rotate-0 transition ease-linear">&rarr;</span></a>
+            <a class="flex justify-between items-center"  href="{% url 'perfume' %}"
+              >perfume <span class="text-[18px] rotate-[-36deg] group-hover:rotate-0 transition ease-linear">&rarr;</span></a>
           </li>
           <li class="py-[13px] px-[24px] hover:bg-grey group">
             <a class="flex justify-between items-center"  href="{% url 'accessories' %}">Accessories <span class="text-[18px] rotate-[-36deg] group-hover:rotate-0 transition ease-linear">&rarr;</span></a>
           </li>
+          <li class="py-[13px] px-[24px] hover:bg-grey group">
+            <a class="flex justify-between items-center"  href="{% url 'entry' %}">Stores <span class="text-[18px] rotate-[-36deg] group-hover:rotate-0 transition ease-linear">&rarr;</span></a>
+          </li>
         </ul>
       </div>
       </nav>
-      {% block content %} 
-      
+    {% block content %}
+
       {% endblock %}
+        <footer class="bg-black text-white py-[3px] w-full mt-auto relative bottom-0">
+  <div class="max-w-7xl mx-auto px-[24px] sm:px-[8px] lg:px-[8px]">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Contact Info -->
+      <div class="text-[12px]">
+        <h2 class="text-lg font-bold mb-4">Contact Us</h2>
+        <p>Siyu Market</p>
+        <p>Siyu</p>
+        <p>Ota, Ogun State, Nigeria</p>
+        <p>Email: <a href="mailto:olakay739@gmail.com">contact@vertigo.com</a></p>
+      </div>
+      <!-- Quick Links -->
+      <div class="text-[12px]">
+        <h2 class="text-lg font-bold mb-4">Quick Links</h2>
+        <ul>
+          <li><a href="{% url 'entry' %}" class="hover:text-gray-300">Home</a></li>
+          <li><a href="{% url 'perfume' %}" class="hover:text-gray-300">Perfumes</a></li>
+          <li><a href="{% url 'jewelry' %}" class="hover:text-gray-300">Jewelries</a></li>
+          <li><a href="{% url 'clothing' %}" class="hover:text-gray-300">Clothings</a></li>
+          <li><a href="{% url 'accessories' %}" class="hover:text-gray-300">Accessories</a></li>
+        </ul>
+      </div>
+      <!-- Social Media -->
+      <div class="">
+        <h2 class="text-lg font-bold mb-4">Follow Us</h2>
+        <div class="flex space-x-2">
+          <a href="#" class="hover:text-gray-300">
+            <i class="fa-brands fa-twitter"></i>
+          </a>
+          <a href="#" class="hover:text-gray-300">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a href="https://wa.me/message/LNPFNTWJM4QYI1" class="hover:text-gray-300">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+            <a href="https://t.me/+2347060806814" class="hover:text-gray-300">
+            <i class="fa-brands fa-telegram"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="mt-8 text-center text-gray-400 text-[12px]">
+      &copy; 2024 Siyu Market. All rights reserved.
+    </div>
+  </div>
+</footer>
     </main>
     <script src="{% static 'js/main.js' %}"></script>
   </body>
