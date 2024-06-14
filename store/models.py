@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 # Create your models here.
 class Category(models.Model):
     cat_name = models.CharField(max_length=100)
@@ -55,6 +56,8 @@ class Order(models.Model):
     email = models.EmailField(max_length=254, null=True, blank=True, default='')
     telephone = models.CharField(max_length=14, default="")
     payment_status = models.BooleanField(default=False)
+    delivered = models.BooleanField(default=False)
+    date = models.DateTimeField(default=timezone.now())
     instructions = models.TextField()
 
     def __str__(self):

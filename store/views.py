@@ -15,6 +15,7 @@ from django.core.mail import send_mail
 from Vertigo.settings import EMAIL_HOST_USER
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
+from django.core.paginator import Paginator
 # from django.urls import reverse
 # Create your views here.
 
@@ -29,25 +30,40 @@ class home(ListView):
 def store_view(request, shop):
     store_n = Store.objects.get(store_name=shop)
     products = product.objects.filter(store=store_n)
-    return render(request, 'store/shop.html', {'products': products})
+    paginator = Paginator(products, 12)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'store/shop.html', {'products': products, 'store':store_n, 'page_obj':page_obj})
 
 def perfume_view(request):
     shirts_category = Category.objects.get(cat_name='perfume')
     products = product.objects.filter(category=shirts_category)
-    return render(request, 'store/perfume.html', {'products': products})
+    paginator = Paginator(products, 12)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'store/perfume.html', {'products': products, 'page_obj':page_obj})
 
 def jewelry_view(request):
     shirts_category = Category.objects.get(cat_name='jewelry')
     products = product.objects.filter(category=shirts_category)
-    return render(request, 'store/Jewelry.html', {'products': products})
+    paginator = Paginator(products, 12)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'store/Jewelry.html', {'products': products, 'page_obj':page_obj})
 def accessories_view(request):
     shirts_category = Category.objects.get(cat_name='accessories')
     products = product.objects.filter(category=shirts_category)
-    return render(request, 'store/accessories.html', {'products': products})
+    paginator = Paginator(products, 12)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'store/accessories.html', {'products': products, 'page_obj':page_obj})
 def clothing_view(request):
     shirts_category = Category.objects.get(cat_name='clothing')
     products = product.objects.filter(category=shirts_category)
-    return render(request, 'store/clothing.html', {'products': products})
+    paginator = Paginator(products, 12)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'store/clothing.html', {'products': products, 'page_obj':page_obj})
 
 def product_detail(request, product_id):
     products = product.objects.get(pk=product_id)
@@ -173,8 +189,11 @@ def payment_callback(request):
 def search(request):
    s_query = request.GET.get('search')
    products = []
+   stores = []
    if s_query:
        products = product.objects.filter(name__icontains=s_query)
+       stores = Store.objects.filter(store_name__icontains=s_query)
+       total = list(stores) + list(products)
 
-   return render(request, 'store/search.html', {'s_query': s_query, 'products': products})
+   return render(request, 'store/search.html', {'s_query': s_query, 'products': products, "stores":stores})
 

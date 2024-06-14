@@ -40,6 +40,7 @@
                 {{ error }}
                 {% endif %}
              <p class="text-center"> Don't you have an account?  <a href="{% url 'signup' %}" class="text-gold underline font-bold text-[20px]">Sign Up</a> </p>
+                <p class="text-center"> <a href="{% url 'password_reset' %}" class="text-gold underline font-bold text-[20px]">Forgot password?</a> </p>
             </div>
         </div>
     <script src="{% static 'js/login.js' %}"></script>

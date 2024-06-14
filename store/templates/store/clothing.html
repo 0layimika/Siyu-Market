@@ -5,9 +5,9 @@
      <!-- Index Page -->
     <section class="px-[8px] py-[24px] mx-auto w-fit max-w-[1440px] mb-12">
     <h2 class="uppercase font-bold text-[21px] tracking-wide">Clothings</h2>
-    {% if products %}
+    {% if page_obj %}
     <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-[12px]">
-        {% for product in products %}
+        {% for product in page_obj.object_list %}
 
             <div class="bg-black rounded-md w-full max-w-[210px] xsm:max-w-[235px] s:max-w-[280px] md:max-w-[300px] overflow-hidden flex flex-col h-[340px] md:h-[320px] relative hover:scale-[1.02] hover:shadow-lg transition-all duration-300 ease-in-out">
                 <a href="{% url 'details' product_id=product.pk %}" class="flex-grow">
@@ -16,8 +16,8 @@
                     </div>
 
                     <div class="flex flex-col flex-grow gap-[5px] p-[8px]">
-                        <h5 class="font-bold text-[15px] text-white ">{{ product.name }}</h5>
-                        <p class="text-[12px] font-light pb-[10px] text-white">{{ product.store }}</p>
+                        <h5 class="font-bold text-[20px] text-white text-center">{{ product.name }}</h5>
+                        <p class="text-[16px] font-light pb-[10px] text-white text-center">{{ product.store }}</p>
                         <div class="border bg-white p-2 text-center rounded-sm absolute bottom-[8px] left-0 right-0 w-[97%] mx-auto">
                             <p class="text-[14px] flex items-center gap-[10px] mx-auto w-fit relative bottom-0">
                                 <img class="w-[16px]" src="{% static 'images/cart.svg' %}"> -
@@ -29,6 +29,19 @@
             </div>
         {% endfor %}
     </div>
+        <div class="pagination mt-[24px]">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a class="px-2 py-2 border bg-black text-white" href="?page=1">First</a>
+                    <a class="px-2 py-2 border bg-black text-white" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                {% endif %}
+{#                <span class="px-2 py-1 border ">{{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>#}
+            {% if page_obj.has_next %}
+                <a class="px-2 py-2 border bg-black text-white" href="?page={{ page_obj.next_page_number }}">Next</a>
+                <a class="px-2 py-2 border bg-black text-white" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+            {% endif %}
+            </span>
+        </div>
     {% else %}
     <div class="max-w-[1440px] bg-white w-[95%] p-[20px] mt-[24px] shadow-custom mx-auto grid place-content-center gap-[16px]">
         <div class="bg-grey rounded-full p-[24px] h-full w-[120px] mx-auto">

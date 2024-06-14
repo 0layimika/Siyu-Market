@@ -2,7 +2,6 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib import auth
 from store.models import Cart, product
-from captcha.fields import ReCaptchaField
 # Create your views here.
 import store.views
 import requests
@@ -15,18 +14,8 @@ def signup(request):
                 User.objects.get(username=request.POST["username"])
                 return render (request, 'accounts/signup.html',{'error':'Email address already exists'})
             except User.DoesNotExist:
-                # recaptcha_response = request.POST.get('g-recaptcha-response')
-                # recaptcha_secret_key = '6Lcu4vEoAAAAAGEXHqglg3Knhk2w6GUIALOHfPSV'
-                # data = {
-                #     'secret': recaptcha_secret_key,
-                #     'response': recaptcha_response,
-                # }
-                # response = requests.post('https://www.google.com/recaptcha/api/siteverify', data=data)
-                # result = response.json()
-                # if not result['success']:
-                #     return render(request, 'accounts/signup.html', {'error': 'reCAPTCHA verification failed'})
 
-                user = User.objects.create_user(request.POST['username'],password=request.POST['password'])
+                user = User.objects.create_user(request.POST['username'],email=request.POST['username'],password=request.POST['password'])
                 auth.login(request, user)
                 # next_url = request.GET.get('next')
                 add_to_cart_product_id = request.session.get('add_to_cart_product_id')
@@ -82,3 +71,5 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect('home')
+
+
