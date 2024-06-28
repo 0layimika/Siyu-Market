@@ -57,7 +57,7 @@ class Order(models.Model):
     telephone = models.CharField(max_length=14, default="")
     payment_status = models.BooleanField(default=False)
     delivered = models.BooleanField(default=False)
-    date = models.DateTimeField(default=timezone.now())
+    date = models.DateTimeField(timezone.now())
     instructions = models.TextField()
 
     def __str__(self):

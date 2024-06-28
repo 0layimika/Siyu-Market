@@ -1,3 +1,4 @@
+import django.http
 from paystackapi.paystack import Paystack
 from django.conf import settings
 paystack = Paystack(settings.PAYSTACK_SECRET_KEY)
@@ -16,8 +17,7 @@ from Vertigo.settings import EMAIL_HOST_USER
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.core.paginator import Paginator
-# from django.urls import reverse
-# Create your views here.
+
 
 class entry(ListView):
     model = Store
@@ -112,7 +112,7 @@ def checkout(request):
     total_price = sum(
         float(item.product.price.replace(',', '')) * item.quantity for item in cart_items
     )
-    delivery_fee = (12/100)*total_price
+    delivery_fee = 200
     total_price += delivery_fee
 
     if request.method == 'POST':
@@ -196,4 +196,5 @@ def search(request):
        total = list(stores) + list(products)
 
    return render(request, 'store/search.html', {'s_query': s_query, 'products': products, "stores":stores})
+
 

@@ -11,10 +11,10 @@
     <link rel="stylesheet" href="{% static 'css/output.css' %}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" href="{% static 'images/logo1.png' %}"/>
-      <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <title>Siyu Market</title>
   </head>
-  <body class="relative font-main" style="background-color: saddlebrown">
+  <body class="relative font-main" style="background-color: navajowhite">
     <main class="max-w-[100%] mx-auto relative">
       <!-- ===== Overlays ====== -->
       <div
@@ -169,55 +169,58 @@
         </ul>
       </div>
       </nav>
-    {% block content %}
+        <main class="mb-52">
+            {% block content %}
 
-      {% endblock %}
-        <footer class="bg-black text-white py-[3px] w-full  mt-auto relative bottom-0 mt-20">
-  <div class="max-w-7xl mx-auto px-[24px] sm:px-[8px] lg:px-[8px]">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <!-- Contact Info -->
-      <div class="text-[12px]">
-        <h2 class="text-lg font-bold mb-4">Contact Us</h2>
-        <p>Siyu Market</p>
-        <p>Siyu</p>
-        <p>Ota, Ogun State, Nigeria</p>
-        <p>Email: <a href="mailto:siyumarket@gmail.com">siyumarket@gmail.com</a></p>
-      </div>
-      <!-- Quick Links -->
-      <div class="text-[12px]">
-        <h2 class="text-lg font-bold mb-4">Quick Links</h2>
-        <ul>
-          <li><a href="{% url 'entry' %}" class="hover:text-gray-300">Home</a></li>
-          <li><a href="{% url 'perfume' %}" class="hover:text-gray-300">Perfumes</a></li>
-          <li><a href="{% url 'jewelry' %}" class="hover:text-gray-300">Jewelries</a></li>
-          <li><a href="{% url 'clothing' %}" class="hover:text-gray-300">Clothings</a></li>
-          <li><a href="{% url 'accessories' %}" class="hover:text-gray-300">Accessories</a></li>
-        </ul>
-      </div>
-      <!-- Social Media -->
-      <div class="">
-        <h2 class="text-lg font-bold mb-4">Follow Us</h2>
-        <div class="flex space-x-2">
-          <a href="#" class="hover:text-gray-300">
-            <i class="fa-brands fa-twitter"></i>
-          </a>
-          <a href="#" class="hover:text-gray-300">
-            <i class="fa-brands fa-instagram"></i>
-          </a>
-          <a href="https://wa.me/message/LNPFNTWJM4QYI1" class="hover:text-gray-300">
-            <i class="fa-brands fa-whatsapp"></i>
-          </a>
-            <a href="https://t.me/+2347060806814" class="hover:text-gray-300">
-            <i class="fa-brands fa-telegram"></i>
-          </a>
+            {% endblock %}
+        </main>
+
+        <footer class="bg-black text-white py-[3px] w-full mt-auto sm:fixed sm:bottom-0 h-[170px]">
+        <div class="max-w-7xl mx-auto px-[24px] sm:px-[8px] lg:px-[8px]">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Contact Info -->
+                <div class="text-[12px]">
+                    <h2 class="text-lg font-bold mb-4">Contact Us</h2>
+                    <p>Siyu Market</p>
+                    <p>Siyu</p>
+                    <p>Ota, Ogun State, Nigeria</p>
+                    <p>Email: <a href="mailto:siyumarket@gmail.com">siyumarket@gmail.com</a></p>
+                </div>
+                <!-- Quick Links -->
+                <div class="text-[12px]">
+                    <h2 class="text-lg font-bold mb-4">Quick Links</h2>
+                    <ul>
+                        <li><a href="{% url 'entry' %}" class="hover:text-gray-300">Home</a></li>
+                        <li><a href="{% url 'perfume' %}" class="hover:text-gray-300">Perfumes</a></li>
+                        <li><a href="{% url 'jewelry' %}" class="hover:text-gray-300">Jewelries</a></li>
+                        <li><a href="{% url 'clothing' %}" class="hover:text-gray-300">Clothings</a></li>
+                        <li><a href="{% url 'accessories' %}" class="hover:text-gray-300">Accessories</a></li>
+                    </ul>
+                </div>
+                <!-- Social Media -->
+                <div class="">
+                    <h2 class="text-lg font-bold mb-4">Follow Us</h2>
+                    <div class="flex space-x-2">
+                        <a href="#" class="hover:text-gray-300">
+                            <i class="fa-brands fa-twitter"></i>
+                        </a>
+                        <a href="#" class="hover:text-gray-300">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/message/LNPFNTWJM4QYI1" class="hover:text-gray-300">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                        <a href="https://t.me/+2347060806814" class="hover:text-gray-300">
+                            <i class="fa-brands fa-telegram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 text-center text-gray-400 text-[12px]">
+                &copy; 2024 Siyu Market. All rights reserved.
+            </div>
         </div>
-      </div>
-    </div>
-    <div class="mt-8 text-center text-gray-400 text-[12px]">
-      &copy; 2024 Siyu Market. All rights reserved.
-    </div>
-  </div>
-</footer>
+    </footer>
     </main>
     <script src="{% static 'js/main.js' %}"></script>
   </body>

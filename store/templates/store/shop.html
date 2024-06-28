@@ -3,8 +3,9 @@
 {% load static %}
 
      <!-- Index Page -->
-    <section class="px-[8px] py-[24px] mx-auto w-fit max-w-[1440px] mb-12">
+    <section class="px-[8px] py-[24px] mx-auto w-fit max-w-[1440px]">
     <h2 class="uppercase font-bold text-[21px] tracking-wide">{{ store.store_name }}</h2>
+    <p>{{ store.description }}</p>
     {% if page_obj %}
     <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-[12px]">
         {% for product in page_obj.object_list %}
