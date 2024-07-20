@@ -1,4 +1,3 @@
-<!-- cart.html -->
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
@@ -12,72 +11,111 @@
             <p>Sub-Total :</p>
         </div>
     </div>
-{% for cart_item in carts %}
-<!-- Mobile Views-->
-        <div class="cart-item grid gap-[15px] pb-[28px] md:hidden">
-            <div class="border-b-[0.3px] border-soft-black">
+    {% for cart_item in carts %}
+    <!-- Mobile Views-->
+    <div class="cart-item grid gap-[15px] pb-[28px] md:hidden">
+
+        <div class="border-b-[0.3px] border-soft-black">
+            <a href="{% url 'remove' cart_item_id=cart_item.pk %}" class="inline-block">
+                <img class="w-[20px] pb-[8px]" src="{% static 'images/exit-cart.svg' %}" alt="remove from cart">
+            </a>
+        </div>
+        <div class="flex flex-col gap-[16px] border-b-[0.3px] border-soft-black pb-[18px]">
+            <p class="font-extrabold text-[10px] uppercase">Product :</p>
+            <div class="flex gap-[8px]">
+                <img class="w-[80px] h-full" src="{{ cart_item.product.image.url }}"></img>
+                <p>{{ cart_item.product.name }} <br> [ {{ cart_item.size}} ] <br> {{ cart_item.product.store }}</p>
+            </div>
+        </div>
+        <div class="border-b-[0.3px] border-soft-black pb-[18px]">
+            {% if messages %}
+            <div id="notification" class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
+                {% for message in messages %}
+                <div class="bg-green-100 border-t border-b border-green-500 text-green-700 px-4 py-3 shadow-md rounded-lg mb-4" role="alert">
+                    <div class="flex">
+                        <div class="py-1"><svg class="fill-current h-6 w-6 text-green-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 15l-5.5-5.5 1.41-1.41L10 12.17l7.09-7.09 1.41 1.41z"/></svg></div>
+                        <div>
+                            <p class="font-bold">{{ message }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            <p class="font-extrabold text-[10px] uppercase pb-[8px]">Quantity :</p>
+            <form class="flex justify-between items-center" method="post" action="{% url 'update' cart_item_id=cart_item.pk %}">
+                {% csrf_token %}
+                <div class="border-[0.7px] border-soft-black p-[5px] relative content-center w-[100px] flex justify-center">
+                    <span class="absolute top-[50%] translate-y-[-50%] right-[5px] qty-minus"><img class="w-[20px] h-full cursor-pointer" src="{% static 'images/minus.svg'%}"></span>
+                    <input class="w-[50px] input-qty font-extralight border-none outline-none py-[2.5px] text-center" type="number" value="{{ cart_item.quantity }}" min="1" name="quantity">
+                    <span class="absolute top-[50%] translate-y-[-50%] left-[5px] qty-add"> <img class="w-[20px] h-full cursor-pointer" src="{% static 'images/plus.svg'%}"></span>
+                </div>
+
+                <button class="text-center cursor-pointer update-btn bg-grey-btn text-white px-[5px] text-[15px] w-fit py-[6.8px]"  type="submit">Update Cart</button>
+            </form>
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                    <p class="text-red-600 font-bold">{{ message }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        <div class="flex justify-between items-center border-b-[0.3px] border-soft-black pb-[15px]">
+            <p class="font-extrabold text-[10px] uppercase">Sub-Total :</p>
+            <p class="font-bold text-[14px]">₦{{ cart_item.product.price }}</p>
+        </div>
+    </div>
+
+    <!-- Desktop View-->
+    <div class="md:flex justify-between items-start pb-[28px] border-b-[0.3px] max-w-[980px] hidden border-soft-black">
+        <div class="gap-[16px]">
+
+            <div class="flex items-center gap-[24px]">
                 <a href="{% url 'remove' cart_item_id=cart_item.pk %}" class="inline-block">
                     <img class="w-[20px] pb-[8px]" src="{% static 'images/exit-cart.svg' %}" alt="remove from cart">
                 </a>
-            </div>
-            <div class="flex flex-col gap-[16px] border-b-[0.3px] border-soft-black pb-[18px]">
-                <p class="font-extrabold text-[10px] uppercase">Product :</p>
                 <div class="flex gap-[8px]">
                     <img class="w-[80px] h-full" src="{{ cart_item.product.image.url }}"></img>
                     <p>{{ cart_item.product.name }} <br> [ {{ cart_item.size}} ] <br> {{ cart_item.product.store }}</p>
                 </div>
             </div>
-            <div class="border-b-[0.3px] border-soft-black pb-[18px]">
-                    <p class="font-extrabold text-[10px] uppercase pb-[8px]">Quantity :</p>
-                    <form class="flex justify-between items-center" method="post" action="{% url 'update' cart_item_id=cart_item.pk %}">
-                        {% csrf_token %}
-                        <div class="border-[0.7px] border-soft-black p-[5px] relative content-center w-[100px] flex justify-center">
-                            <span class="absolute top-[50%] translate-y-[-50%] right-[5px] qty-minus"><img class="w-[20px] h-full cursor-pointer" src="{% static 'images/minus.svg'%}"></img></span>
-                            <input class="w-[50px] input-qty font-extralight border-none outline-none py-[2.5px] text-center" type="number" value="{{ cart_item.quantity }}" min="1" name="quantity">
-                            <span class="absolute top-[50%] translate-y-[-50%] left-[5px] qty-add"> <img class="w-[20px] h-full cursor-pointer" src="{% static 'images/plus.svg'%}"></img></span>
-                        </div>
-                        
-                        <button class="text-center cursor-pointer update-btn bg-grey-btn text-white px-[5px] text-[15px] w-fit py-[6.8px]"  type="submit">Update Cart</button>
-                    </form>
-            </div>
-            <div class="flex justify-between items-center border-b-[0.3px] border-soft-black pb-[15px]">
-                <p class="font-extrabold text-[10px] uppercase">Sub-Total :</p>
-                <p class="font-bold text-[14px]">₦{{ cart_item.product.price }}</p>
-            </div>
         </div>
-
-<!-- Desktop View-->
-        <div class="md:flex justify-between items-start pb-[28px] border-b-[0.3px] max-w-[980px] hidden border-soft-black">
-            <div class="gap-[16px]">
-                <div class="flex items-center gap-[24px]">
-                    <a href="{% url 'remove' cart_item_id=cart_item.pk %}" class="inline-block">
-                        <img class="w-[20px] pb-[8px]" src="{% static 'images/exit-cart.svg' %}" alt="remove from cart">
-                    </a>
-                    <div class="flex gap-[8px]">
-                        <img class="w-[80px] h-full" src="{{ cart_item.product.image.url }}"></img>
-                        <p>{{ cart_item.product.name }} <br> [ {{ cart_item.size}} ] <br> {{ cart_item.product.store }}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="flex gap-[65px] items-start">
-                <div class="">
-                    <form class="flex flex-col gap-[12px] items-center" method="post" action="{% url 'update' cart_item_id=cart_item.pk %}">
-                        {% csrf_token %}
-                        <div class="border-[0.7px] border-soft-black p-[5px] relative content-center w-[100px] flex justify-center">
-                            <span class="absolute top-[50%] translate-y-[-50%] right-[5px] qty-minus"><img class="w-[20px] h-full cursor-pointer" src="{% static 'images/minus.svg'%}"></img></span>
-                            <input class="w-[50px] input-qty font-extralight border-none outline-none py-[2.5px] text-center" type="number" value="{{ cart_item.quantity }}" min="1" name="quantity">
-                            <span class="absolute top-[50%] translate-y-[-50%] left-[5px] qty-add"> <img class="w-[20px] h-full cursor-pointer" src="{% static 'images/plus.svg'%}"></img></span>
+        <div class="flex gap-[65px] items-start">
+            <div class="">
+                {% if messages %}
+                <div id="notification" class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
+                    {% for message in messages %}
+                    <div class="bg-green-100 border-t border-b border-green-500 text-green-700 px-4 py-3 shadow-md rounded-lg mb-4" role="alert">
+                        <div class="flex">
+                            <div class="py-1"><svg class="fill-current h-6 w-6 text-green-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 15l-5.5-5.5 1.41-1.41L10 12.17l7.09-7.09 1.41 1.41z"/></svg></div>
+                            <div>
+                                <p class="font-bold">{{ message }}</p>
+                            </div>
                         </div>
-                        
-                        <button class="text-center cursor-pointer update-btn bg-grey-btn text-white px-[5px] text-[15px] md:text-[14px] w-fit py-[6.8px]"  type="submit">Update Cart</button>
-                    </form>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                <form class="flex flex-col gap-[12px] items-center" method="post" action="{% url 'update' cart_item_id=cart_item.pk %}">
+                    {% csrf_token %}
+                    <div class="border-[0.7px] border-soft-black p-[5px] relative content-center w-[100px] flex justify-center">
+                        <span class="absolute top-[50%] translate-y-[-50%] right-[5px] qty-minus"><img class="w-[20px] h-full cursor-pointer" src="{% static 'images/minus.svg'%}"></span>
+                        <input class="w-[50px] input-qty font-extralight border-none outline-none py-[2.5px] text-center" type="number" value="{{ cart_item.quantity }}" min="1" name="quantity">
+                        <span class="absolute top-[50%] translate-y-[-50%] left-[5px] qty-add"> <img class="w-[20px] h-full cursor-pointer" src="{% static 'images/plus.svg'%}"></span>
+                    </div>
+
+                    <button class="text-center cursor-pointer update-btn bg-grey-btn text-white px-[5px] text-[15px] md:text-[14px] w-fit py-[6.8px]"  type="submit">Update Cart</button>
+                </form>
+
             </div>
             <div class="justify-between items-center ">
                 <p class="font-bold text-[14px]">₦{{ cart_item.product.price }}</p>
             </div>
-            </div>
         </div>
-
+    </div>
     {% endfor %}
     <a href="{% url 'checkout' %}" class="uppercase shadow-lg text-center font-main w-fit text-[14px] py-[12px] px-[24px] bg-black text-white hover:bg-white hover:text-black border hover:rounded-md transition inline-block duration-300 ml-auto">
         Check Out
@@ -97,6 +135,15 @@
 </div>
 {% endif %}
 
-{#    <h3>Total Price: ₦{{ cat.price }}</h3>#}
-
+<script>
+// JavaScript to remove the notification after 500 milliseconds
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+        var notification = document.getElementById('notification');
+        if (notification) {
+            notification.remove();
+        }
+    }, 500);
+});
+</script>
 {% endblock %}

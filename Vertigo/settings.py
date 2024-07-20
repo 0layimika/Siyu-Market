@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -82,6 +83,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+
     }
 }
 
@@ -135,8 +137,8 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-PAYSTACK_SECRET_KEY = "sk_test_6fcc4bbe693190841c333d94e606076e1284d4fc"
-PAYSTACK_PUBLIC_KEY = "pk_test_2662b54aba5e0b6bfbf3bf3a70fae6a986cb5fa9"
+PAYSTACK_SECRET_KEY = config('PAYSTACK_SECRET_KEY')
+PAYSTACK_PUBLIC_KEY = config('PAYSTACK_PUBLIC_KEY')
 
 ENCRYPT_KEY = b''
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -144,6 +146,10 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'siyumarket@gmail.com'
-EMAIL_HOST_PASSWORD = 'axjntlvramrwanmp'
+EMAIL_HOST_USER = config('EMAIL')
+EMAIL_HOST_PASSWORD = config("EMAIL_PASSWORD")
 EMAIL_DEBUG = True
+
+
+# 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',

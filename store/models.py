@@ -2,6 +2,11 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 # Create your models here.
+
+# class Vendor(models.Model):
+#     email = models.EmailField(max_length=254)
+#     password = models.CharField(max_length=50)
+
 class Category(models.Model):
     cat_name = models.CharField(max_length=100)
     description = models.TextField()
@@ -10,12 +15,15 @@ class Category(models.Model):
         return self.cat_name
 
 class Store(models.Model):
+    vendor = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     store_name = models.CharField(max_length=100)
     description = models.TextField()
     email = models.EmailField(max_length=254, null=True, blank=True, default='')
 
     def __str__(self):
         return self.store_name
+
+
 
 class product(models.Model):
     name = models.CharField(max_length=100, default='')
@@ -24,6 +32,7 @@ class product(models.Model):
     image = models.ImageField(upload_to='images/', null=True, blank=True)
     price = models.CharField(max_length=50, default='')
     description = models.TextField()
+    stock = models.IntegerField(default=0)
 
 
     def __str__(self):
@@ -57,7 +66,7 @@ class Order(models.Model):
     telephone = models.CharField(max_length=14, default="")
     payment_status = models.BooleanField(default=False)
     delivered = models.BooleanField(default=False)
-    date = models.DateTimeField(timezone.now())
+    date = models.DateTimeField(auto_now_add=True)
     instructions = models.TextField()
 
     def __str__(self):

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load static %}
+    <div class="flex items-center justify-center h-screen">
+        <form class="bg-white p-6 rounded shadow-md w-full max-w-sm" action="{% url 'update_product' product.id %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% if error %}
+                <p class="text-red-500">{{ error }}</p>
+            {% endif %}
+            <div class="mb-4">
+                <label for="name" class="block text-sm font-medium text-gray-700">Product Name:</label>
+                <input type="text" id="name" name="name" value="{{ product.name }}" required class="mt-1 p-2 w-full border border-gray-300 rounded-md" />
+            </div>
+            <div class="mb-4">
+                <label for="price" class="block text-sm font-medium text-gray-700">Price:</label>
+                <input type="number" id="price" name="price" value="{{ product.price }}" required class="mt-1 p-2 w-full border border-gray-300 rounded-md" />
+            </div>
+            <div class="mb-4">
+                <label for="stock" class="block text-sm font-medium text-gray-700">Available Stock:</label>
+                <input type="number" id="stock" name="stock" value="{{ product.stock }}" required class="mt-1 p-2 w-full border border-gray-300 rounded-md" />
+            </div>
+            <div class="mb-4">
+                <label for="desc" class="block text-sm font-medium text-gray-700">Description:</label>
+                <input type="text" id="desc" name="desc" value="{{ product.description }}" required class="mt-1 p-2 w-full border border-gray-300 rounded-md" />
+            </div>
+            <div class="mb-4">
+                <label for="image" class="block text-sm font-medium text-gray-700">Image:</label>
+                <input type="file" id="image" name="image" class="mt-1 p-2 w-full border border-gray-300 rounded-md" />
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="mt-2" width="100">
+                {% endif %}
+            </div>
+            <div class="mb-4">
+                <label for="category" class="block text-sm font-medium text-gray-700">Category:</label>
+                <select id="category" name="category" required class="mt-1 p-2 w-full border border-gray-300 rounded-md">
+                    <option value="">Select a category</option>
+                    {% for category in categories %}
+                        <option value="{{ category.cat_name }}" {% if product.category == category %}selected{% endif %}>{{ category.cat_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600">Update</button>
+        </form>
+    </div>
+{% endblock %}

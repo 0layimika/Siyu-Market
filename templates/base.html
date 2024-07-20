@@ -75,29 +75,35 @@
         </div>
 
         <!-- ===== VERTIGO LOGO ====== -->
-        <a class="inline-block absolute left-[50%] translate-x-[-50%] md:translate-x-[-45%] " href="{% url 'entry' %}">
+        <a class="inline-block absolute left-[50%] translate-x-[-50%] md:translate-x-[-45%]" href="{% url 'entry' %}">
           <img class="w-[85px]" src="{% static 'images/SM.png' %}" alt="vertigo"/>
         </a>
 
         <!-- ===== Nav Icons ====== -->
-        <ul class="h-[41px] flex gap-[17px] items-center">
+        <ul class="h-[41px] flex gap-[10px] items-center">
           <li>
             <a class="hidden lg:block search-btn" href="#" ><img class="w-[24px]" src="{% static 'images/search.svg' %}" alt="search" /></a>
           </li>
-      
+
           {% if user.is_authenticated %}
+          <li class="">
+            <a class="" href="{% url 'product_list' %}"> <img class="w-[24px]" src="{% static 'images/kiosk.svg' %}" alt="menu" /> </a>
+          </li>
           <li class="">
             <a class="" href="{% url 'cart_item' %}"> <img class="w-[24px]" src="{% static 'images/cart.svg' %}" alt="menu" /> </a>
           </li>
           <li>
-            <a class="" href="{% url 'logout' %}"> <img class="w-[24px]" src="{% static 'images/user.svg' %}" alt="user" />  </a>
+            <a class="" href="{% url 'logout' %}"> <img class="w-[24px]" src="{% static 'images/logout.svg' %}" alt="user" />  </a>
           </li>
           {% else %}
           <li class="">
+            <a class="" href="{% url 'product_list' %}"> <img class="w-[24px]" src="{% static 'images/kiosk.svg' %}" alt="menu" /> </a>
+          </li>
+          <li class="">
             <a class="" href="{% url 'cart_item' %}"> <img class="w-[24px]" src="{% static 'images/cart.svg' %}" alt="menu" /> </a>
           </li>
           <li>
-            <a class="" href="{% url 'signup' %}"> <img class="w-[24px]" src="{% static 'images/user.svg' %}" alt="user" />  </a>
+            <a class="" href="{% url 'login' %}"> <img class="w-[24px]" src="{% static 'images/user.svg' %}" alt="user" />  </a>
           </li>
           {% endif %}
         </ul>
@@ -175,20 +181,20 @@
             {% endblock %}
         </main>
 
-        <footer class="bg-black text-white py-[3px] w-full mt-auto sm:fixed sm:bottom-0 h-[170px]">
+        <footer class="bg-black text-white w-full mt-auto sm:fixed sm:bottom-0 h-auto">
         <div class="max-w-7xl mx-auto px-[24px] sm:px-[8px] lg:px-[8px]">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Contact Info -->
-                <div class="text-[12px]">
-                    <h2 class="text-lg font-bold mb-4">Contact Us</h2>
+                <div class="text-[10px]">
+                    <h2 class="text-[15px] font-bold mb-4">Contact Us</h2>
                     <p>Siyu Market</p>
                     <p>Siyu</p>
                     <p>Ota, Ogun State, Nigeria</p>
                     <p>Email: <a href="mailto:siyumarket@gmail.com">siyumarket@gmail.com</a></p>
                 </div>
                 <!-- Quick Links -->
-                <div class="text-[12px]">
-                    <h2 class="text-lg font-bold mb-4">Quick Links</h2>
+                <div class="text-[10px]">
+                    <h2 class="text-[15px] font-bold mb-4">Quick Links</h2>
                     <ul>
                         <li><a href="{% url 'entry' %}" class="hover:text-gray-300">Home</a></li>
                         <li><a href="{% url 'perfume' %}" class="hover:text-gray-300">Perfumes</a></li>
@@ -199,7 +205,7 @@
                 </div>
                 <!-- Social Media -->
                 <div class="">
-                    <h2 class="text-lg font-bold mb-4">Follow Us</h2>
+                    <h2 class="text-[15px] font-bold mb-4">Follow Us</h2>
                     <div class="flex space-x-2">
                         <a href="#" class="hover:text-gray-300">
                             <i class="fa-brands fa-twitter"></i>
@@ -216,7 +222,7 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-8 text-center text-gray-400 text-[12px]">
+            <div class="mt-2 text-center text-gray-400 text-[10px]">
                 &copy; 2024 Siyu Market. All rights reserved.
             </div>
         </div>

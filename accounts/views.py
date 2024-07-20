@@ -62,7 +62,8 @@ def login(request):
                     new_cart_item.save()
                 return redirect('cart_item')
             else:
-                return redirect('home')
+                next_page = request.POST.get('next','') or 'home'
+                return redirect(next_page)
         else:
             return render(request,'accounts/login.html',{'error':"Email and Password don't match"})
     else:

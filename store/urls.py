@@ -19,5 +19,10 @@ urlpatterns=[
     path('update/<int:cart_item_id>',views.cart_update,name='update'),
     path('search/',views.search,name='search'),
     path('payment/callback',views.payment_callback, name='payment_callback'),
+    path('vendor', views.create_store, name="create_store"),
+    path('vendor/products', views.product_list, name='product_list'),
+    path('vendor/add', views.add_product, name="add_product"),
+    path('vendor/delete/<int:id>', views.delete_product, name='delete product'),
+    path('vendor/update/<int:id>', views.update_product, name='update_product')
 
 ]

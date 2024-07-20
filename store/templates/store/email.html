@@ -39,7 +39,7 @@
             <div class="order-items">
                 {% for item in order.order_items.all %}
                     <div class="order-item">
-                        <p>{{ item.quantity }}X {{ item.product.name }}({{ item.size }}) from {{ item.size }}</p>
+                        <p>{{ item.quantity }}X {{ item.product.name }}({{ item.size }}) from {{ item.product.store.store_name }}</p>
                     </div>
                 {% endfor %}
             </div>

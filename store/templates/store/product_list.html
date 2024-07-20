@@ -1,0 +1,50 @@
+
+{% extends 'base.html' %}
+{% block content  %}
+    {% load static %}
+{% if products %}
+    <div class="py-12">
+  <div class="container mx-auto px-4">
+    <div class="overflow-x-auto">
+      <table class="min-w-full mx-auto border-2 bg-white">
+        <thead>
+          <tr>
+            <th class="px-4 py-2 w-10 border-2 border-black">id</th>
+            <th class="px-4 py-2 w-1/4 border-2 border-black">Name</th>
+            <th class="px-4 py-2 w-1/9 border-2 border-black">Price</th>
+            <th class="px-4 py-2 w-1/9 border-2 border-black">Category</th>
+            <th class="px-4 py-2 w-1/9 border-2 border-black">Stock</th>
+            <th class="px-4 py-2 w-1/12 border-2 border-black"></th>
+            <th class="px-4 py-2 w-1/12 border-2 border-black"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for product in products %}
+          <tr>
+            <td class="px-4 py-2 border-2 border-black text-center">{{ product.id }}</td>
+            <td class="px-4 py-2 border-2 border-black text-center">{{ product.name }}</td>
+            <td class="px-4 py-2 border-2 border-black text-center">{{ product.price }}</td>
+            <td class="px-4 py-2 border-2 border-black text-center">{{ product.category }}</td>
+            <td class="px-4 py-2 border-2 border-black text-center">{{ product.stock }}</td>
+            <td class="px-4 py-2 border-2 border-black text-center">
+                <a href="{% url 'update_product' id=product.pk %}" class="bg-blue-400 text-white p-2 cursor-pointer border rounded-full">Update</a>
+            </td>
+            <td class="px-4 py-2 border-2 border-black text-center">
+                <a href="{% url 'delete product' id=product.pk %}" class="bg-red-800 text-white p-2 cursor-pointer border rounded-full">Delete</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% else %}
+<p>You currently have no product available</p>
+{% endif %}
+    <div class="flex justify-center items-center">
+  <a href="{% url 'add_product' %}" class="flex items-center">
+    <img class="w-[24px]" src="{% static 'images/pluss.svg' %}" alt="search"/>
+  </a>
+</div>
+{% endblock %}
