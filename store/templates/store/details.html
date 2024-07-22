@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
-{% block content  %}
+{% block content %}
 
 
 
 
-<div class="max-w-[1200px] mt-[16px] bg-white w-[95%] p-[20px] mx-auto details">
-    <div class="flex flex-col items-start gap-[16px] details s:flex-row max-w-[800px]">
+    <div class="max-w-[1200px] mt-[16px] bg-white w-[95%] p-[20px] mx-auto details">
+        <div class="flex flex-col items-start gap-[16px] details s:flex-row max-w-[800px]">
 
-        <div class="w-full relative rounded-md overflow-hidden s:max-h-[270px] s:max-w-[285px]">
-            {#<a href="{% url 'details' product_id=product.pk %}" class="card-link">#}
+            <div class="w-full relative rounded-md overflow-hidden s:max-h-[270px] s:max-w-[285px]">
+                {#<a href="{% url 'details' product_id=product.pk %}" class="card-link">#}
                 <img src="{{ products.image.url }}" class="" alt="...">
-            {#</a>#}
+                {#</a>#}
             </div>
             <div class="">
                 <div class=" flex flex-col gap-[10px] pb-[12px]">
@@ -20,24 +20,49 @@
                 {% if messages %}
                     <div id="notification" class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
                         {% for message in messages %}
-                            <div class="bg-green-100 border-t border-b border-green-500 text-green-700 px-4 py-3 shadow-md rounded-lg mb-4" role="alert">
-                                <div class="flex">
-                                    <div class="py-1"><svg class="fill-current h-6 w-6 text-green-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 15l-5.5-5.5 1.41-1.41L10 12.17l7.09-7.09 1.41 1.41z"/></svg></div>
-                                    <div>
-                                        <p class="font-bold">{{ message }}</p>
+                            {% if message.tags == 'success' %}
+                                <div class="bg-green-100 border-t border-b border-green-500 text-green-700 px-4 py-3 shadow-md rounded-lg mb-4"
+                                     role="alert">
+                                    <div class="flex">
+                                        <div class="py-1">
+                                            <svg class="fill-current h-6 w-6 text-green-500 mr-4"
+                                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                <path d="M10 15l-5.5-5.5 1.41-1.41L10 12.17l7.09-7.09 1.41 1.41z"/>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold">{{ message }}</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            {% elif message.tags == 'warning' %}
+                                <div class="bg-red-100 border-t border-b border-red-500 text-red-700 px-4 py-3 shadow-md rounded-lg mb-4"
+                                     role="alert">
+                                    <div class="flex">
+                                        <div class="py-1">
+                                            <svg class="fill-current h-6 w-6 text-red-500 mr-4"
+                                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                <path d="M10 15l-5.5-5.5 1.41-1.41L10 12.17l7.09-7.09 1.41 1.41z"/>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold">{{ message }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
                         {% endfor %}
                     </div>
                 {% endif %}
-                <form class="grid gap-[10px]" id="select-size" method="post" action="{% url 'cart' product_id=products.pk %}">
-                {% csrf_token %}
+
+                <form class="grid gap-[10px]" id="select-size" method="post"
+                      action="{% url 'cart' product_id=products.pk %}">
+                    {% csrf_token %}
                     </select>
                     <p class="font-bold"> Please select a size</p>
                     <p class="text-[10px]">if product is not in sizes, select any</p>
                     <div class="grid grid-cols-3 items-start gap-[10px] w-full pb-[13px]">
-                        <label  class="inline-block p-[5px] px-[10px] text-center border border-grey-btn hover:bg-black hover:text-white text-[13px] cursor-pointer">
+                        <label class="inline-block p-[5px] px-[10px] text-center border border-grey-btn hover:bg-black hover:text-white text-[13px] cursor-pointer">
                             <input class="hidden size" type="radio" name="size" value="Large">
                             Large
                         </label>
@@ -51,25 +76,28 @@
                         </label>
                     </div>
                     <p class="text-[14px]">{{ products.description }}</p>
-                    <button type="submit" class="bg-black text-white p-[8px] hover:rounded-sm font-semibold hover:bg-white hover:text-black border-[0.5px] transition-all duration-150 ease-linear">Add to Cart</button>
+                    <button type="submit"
+                            class="bg-black text-white p-[8px] hover:rounded-sm font-semibold hover:bg-white hover:text-black border-[0.5px] transition-all duration-150 ease-linear">
+                        Add to Cart
+                    </button>
                 </form>
 
             </div>
-        <div>
-        {#    <a href="{% url 'cart' product_id=products.pk %}" class="btn btn-warning">Add to cart</a>#}
-</div>
+            <div>
+                {#    <a href="{% url 'cart' product_id=products.pk %}" class="btn btn-warning">Add to cart</a>#}
+            </div>
+        </div>
     </div>
-</div>
-<script>
-// JavaScript to remove the notification after 10 seconds
-document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(function() {
-        var notification = document.getElementById('notification');
-        if (notification) {
-            notification.remove();
-        }
-    }, 1000); // 10000 milliseconds = 10 seconds
-});
-</script>
+    <script>
+        // JavaScript to remove the notification after 10 seconds
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                var notification = document.getElementById('notification');
+                if (notification) {
+                    notification.remove();
+                }
+            }, 1000); // 10000 milliseconds = 10 seconds
+        });
+    </script>
 
 {% endblock %}
