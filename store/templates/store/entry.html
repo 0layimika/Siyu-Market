@@ -1,43 +1,67 @@
 {% extends 'base.html' %}
 {% block content %}
-{% load static %}
-    <body>
+    {% load static %}
     <div class="px-4 py-24 mx-auto max-w-full sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl">
-        <div>
-            <h1 class="text-[32px] font-extrabold text-center">Welcome to Siyu Market</h1>
-            <p class="text-center font-bold">Siyu market is your <strong>no.1</strong> plug for everything you could possibly be looking for. </p>
-            <p class="text-center font-bold">Products available include clothing, jewelries, perfumes, iPod accessories and lots more form your favorite and most affordable vendors.</p>
-        </div>
-        <div>
-{#            <div class="container mx-auto py-[24px] lg:flex lg:justify-between">#}
-{##}
-{#            </div>#}
-        </div>
-        {% if store_list %}
-        <div class="mt-6 flex flex-wrap justify-center mb-4">
-    {% for store in store_list %}
-        <a href="{% url 'shop' shop=store.store_name %}" class="w-80 border border-gray-300 rounded-lg p-4 text-center cursor-pointer transition duration-300 ease-in-out transform hover:bg-gray-100 hover:text-black hover:shadow-lg mx-2 mb-4 bg-black text-white">
-            <h1 class="text-xl font-semibold">{{ store.store_name }}</h1>
-            <p class="text-sm mt-2">{{ store.description }}</p>
-        </a>
-    {% endfor %}
-</div>
+        <!-- Welcome Section -->
+        <section class="text-center mb-12">
+            <h1 class="text-4xl font-extrabold text-gray-900 mb-4">Welcome to Siyu Market</h1>
+            <p class="text-lg font-semibold text-gray-700 mb-4">Siyu Market is your <strong>no.1</strong> plug for
+                everything you could possibly be looking for.</p>
+            <p class="text-lg font-semibold text-gray-700">Products available include clothing, jewelry, perfumes, iPod
+                accessories, and more from your favorite and most affordable vendors.</p>
+        </section>
 
-            {% else %}
-        <div class="max-w-[1440px] bg-white w-[95%] p-[20px] mt-[24px] shadow-custom mx-auto grid place-content-center gap-[16px]">
-        <div class="bg-grey rounded-full p-[24px] h-full w-[120px] mx-auto">
-            <img class="h-full w-[120px] mx-auto" src="{% static 'images/empty-cart.svg' %}">
-        </div>
-        <h3 class="text-center font-main">No Stores available at the moment.</h3>
-        <p class="text-center">Register with your Email to get Notification when we Launch</p>
-        <a class="uppercase shadow-lg text-center w-fit mx-auto font-main text-[14px] p-[12px] bg-black text-white hover:bg-soft-black hover:rounded-sm transition" href="{% url 'signup' %}">
-            Sign Up!!
-        </a>
-        </div>
+        <!-- Appeal Section -->
+        <section>
+            <div id="appeal" class="relative bg-black text-white p-6 rounded-lg shadow-lg mt-6 mb-6">
+                <h2 class="text-3xl font-extrabold mb-4 text-center">Special Offer!</h2>
+                <div class="flex items-center justify-center gap-4">
+                    <div class="flex-1 max-w-lg text-left">
+                        <p class="text-lg mb-4 font-extrabold">Free Delivery for the next two weeks.</p>
+                        <p class="text-lg mb-4">For everything you order from now till resumption day, there will be no delivery charges</p>
+                    </div>
+                    <img src="{% static "images/promo.jpg" %}" alt="promo"
+                         class="w-64 h-40 object-cover rounded-md shadow-md">
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Store List Section -->
+        {% if store_list %}
+            <section>
+                <div class="mt-6 flex flex-wrap justify-center mb-4">
+                    {% for store in store_list %}
+                        <a href="{% url 'shop' shop=store.store_name %}"
+                           class="w-80 border border-gray-300 rounded-lg p-4 text-center cursor-pointer transition-transform transform hover:scale-105 hover:bg-gray-100 hover:shadow-lg mx-2 mb-4 bg-black text-white hover:text-black">
+                            <h3 class="text-xl font-semibold mb-2">{{ store.store_name }}</h3>
+                            <p class="text-sm">{{ store.description }}</p>
+                        </a>
+                    {% endfor %}
+                </div>
+            </section>
+        {% else %}
+            <section
+                    class="max-w-screen-lg bg-white w-[95%] p-8 mt-12 shadow-lg mx-auto grid place-content-center gap-4 text-center">
+                <div class="bg-gray-200 rounded-full p-6 h-full w-32 mx-auto">
+                    <img class="h-full w-full object-contain" src="{% static 'images/empty-cart.svg' %}"
+                         alt="empty cart">
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">No Stores available at the moment.</h3>
+                <p class="text-gray-600 mb-4">Register with your Email to get Notification when we Launch</p>
+                <a class="uppercase shadow-lg text-center w-fit mx-auto font-semibold text-sm p-3 bg-black text-white hover:bg-gray-800 rounded transition"
+                   href="{% url 'signup' %}">
+                    Sign Up!!
+                </a>
+            </section>
         {% endif %}
-        <div class="flex justify-center mt-[24px] mb-12">
-            <a href="{% url 'home' %}" class="text-center border-[1.5px] border-black hover:bg-black hover:border-white hover:text-white px-[8px] py-[12px] rounded-md bg-white"> Shop All</a>
-        </div>
+
+        <!-- Shop All Button -->
+        <section class="flex justify-center mt-12 mb-12">
+            <a href="{% url 'home' %}"
+               class="text-center border border-black hover:bg-black hover:border-white hover:text-white px-6 py-3 rounded-md bg-white transition">
+                Shop All
+            </a>
+        </section>
     </div>
-    </body>
 {% endblock %}
